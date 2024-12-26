@@ -49,3 +49,5 @@ login.addEventListener('click', function() {
 function savecookie(key,value) {
     document.cookie = key + '=' + value+';path=/';
 }
+localStorage.removeItem('cart');
+

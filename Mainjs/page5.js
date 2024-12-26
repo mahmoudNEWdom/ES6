@@ -1,11 +1,8 @@
 function getcookie(){
     let cookie = document.cookie;
-    // console.log(cookie);
     let obj = {};
     obj = cookie.split(";");
-    // console.log(obj); 
     let user = obj[0].split("=")[1];
-    // console.log(user);
     return user
     ;
 }
@@ -19,4 +16,11 @@ window.logout=function logout(){
 let home = document.querySelector(".home");
 home.addEventListener("click", function () {
   location.replace("../Mainhtml/page2.html");
+});
+/* -------------------empty the local storage--------------------- */
+localStorage.removeItem("cart");
+/* -------------------empty the cart--------------------- */
+let cartend = document.getElementById("cartend");
+cartend.addEventListener("click", function () {
+  location.replace("../Mainhtml/page4.html");
 });

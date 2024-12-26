@@ -1,17 +1,9 @@
-/* ---------------------COOKIE--------------------------- */
-// onload = function(){
-//     localStorage.removeItem("cart");
-// };
-// onload();
-
+/* ------------------------------Save cookies--------------------------- */
 function getcookie(){
     let cookie = document.cookie;
-    // console.log(cookie);
     let obj = {};
     obj = cookie.split(";");
-    // console.log(obj); 
     let user = obj[0].split("=")[1];
-    // console.log(user);
     return user
     ;
 }
@@ -19,10 +11,7 @@ let cookie = document.getElementById("cookie");
 cookie.innerHTML = getcookie();
 /* ---------------------slider--------------------------- */
 let img = document.querySelector("img");
-// img.setAttribute("src","../images/1.jpg");
-// let i = (img.getAttribute("src").split("/")[2].split(".")[0]);
-// console.log(i);
-setInterval(function(){
+    setInterval(function(){
     let i = Number(img.getAttribute("src").split("/")[2].split(".")[0]);
     
     i++;
@@ -30,8 +19,7 @@ setInterval(function(){
         i=1;
     }
     img.setAttribute("src","../images/"+i+".jpg");
-    // console.log(i);
-},10000);
+    },10000);
 
 window.next = function(){
     let i = Number(img.getAttribute("src").split("/")[2].split(".")[0]);
@@ -56,7 +44,7 @@ window.previous= function(){
 window.logout=function logout(){
     location.replace("../index.html");
 }
-/* -------------------------------------------------------- */
+/* ------------------------product items instead of API-------------------------------- */
 let products =[
     {
         category:"phone",
@@ -169,7 +157,6 @@ let phone = document.getElementById("phone");
 let clothing = document.getElementById("Clothing");
 let laptop = document.getElementById("laptop");
 let All = document.getElementById("all");
-// console.log(clothing);
 let productList = document.querySelector(".product-list");
 
 displayProducts("All");
@@ -195,79 +182,34 @@ function displayProducts(category) {
         }
     });
 }
-    /* ---------------------view product && save local storage----------------------- */
+    /* ---------------------view product on every view button && save it in local storage----------------------- */
     let viewers = document.querySelectorAll(".btn");
-console.log(viewers);
-
-viewers.forEach((viewer, index) => {
+    viewers.forEach((viewer, index) => {
     viewer.addEventListener("click", function() {
-        // localStorage.removeItem("cart");
         let product = products[index];
-        console.log(product);
-
-        // Retrieve existing cart data from localStorage
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Push the new product to the cart
+        let cart = JSON.parse(localStorage.getItem("cart"));
         cart.push(product);
-        // Save the updated cart back to localStorage
         localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Redirect to the next page
         location.replace("../Mainhtml/page3.html");
     });
-});
-
-//     let viewers = document.querySelectorAll(".btn");
-//     console.log(viewers);
-//     viewers.forEach((viewer, index) => {
-//         viewer.addEventListener("click", function() {
-
-//             let product = products[index];
-//             console.log(product);
-//             localStorage.setItem("cart", JSON.stringify(product));
-//             location.replace("../page3/page3.html");
-//         });
-//     });
-// }
-
-/* ---------------------go to page3----------------------- */
-// let going = document.querySelectorAll(".go");
-// console.log(going);
-// going.forEach((go, index) => {
-//     go.addEventListener("click", function() {
-//         let product = products[index];
-//         console.log(product);
-//         localStorage.setItem("product", JSON.stringify(product));
-//         window.open("../page4/page4.html");
-//     });
-// });
-/* --------------------------------------------------------------------------------------------------------------------------------- */
+}); 
+/* -----------------------------add to cart icon and display numbers from local storage items----------------- */
+if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", JSON.stringify([]));
+}
 let howmanyitems = document.getElementById("howmanyitems");
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart"));
+howmanyitems.innerHTML = cart.length;
 let add_to_cart = document.querySelectorAll(".add-to-cart");
 add_to_cart.forEach((add_to_cart, index) => {
     add_to_cart.addEventListener("click", function() {
         let product = products[index];
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
-howmanyitems.innerHTML = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : 0;
-
+        howmanyitems.innerHTML = cart.length;
     });
 });
-
-/* --------------------------------------------------------------- */
-// let add_to_cart = document.querySelectorAll(".add-to-cart");
-// add_to_cart.forEach((cart, index) => {
-//     cart.addEventListener("click", function() {
-//         let product = products[index];
-//         console.log(product);
-//         localStorage.setItem("product", JSON.stringify(product));
-//     });
-// });
-
-
-/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* ---------------------event listeners--------------------- */
 phone.addEventListener("click", function() {
     displayProducts("phone");
 });
@@ -284,20 +226,20 @@ All.addEventListener("click", function() {
     displayProducts("All");
 });
 
-/* ----------------------------------------------------------- >>>>>>>>>>>>>>>>>>>>>>> عدل علي الايقون */ 
+/* ---------icon event listener----------*/ 
 let cartend = document.getElementById("cartend");
 cartend.addEventListener("click", function(){
-    window.open("../Mainhtml/page4.html");
-/* -----------------------------------append--------------------------------------- */
-displayProducts("All");
-function displayProducts(category) {
-    productList.innerHTML ="";
+  window.open("../Mainhtml/page4.html");
+  /* ---------------------------------append & display all products by default--------------------------------------- */
+  displayProducts("All");
+  function displayProducts(category) {
+    productList.innerHTML = "";
     let cart = JSON.parse(localStorage.getItem("cart"));
     cart.forEach((product, index) => {
-        if (category === "All" || product.category === category) {
-            const productDiv = document.createElement("div");
-            productDiv.classList.add("product");
-            productDiv.innerHTML = `
+      if (category === "All" || product.category === category) {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product");
+        productDiv.innerHTML = `
                 <img src="${product.img}" alt="${product.name}">
                 <div class="info">
                     <h3>${product.name}</h3>
@@ -307,38 +249,8 @@ function displayProducts(category) {
                     <button href="#" class=" add-to-cart"><i class="fa fa-check" aria-hidden="true"></i></button>
                 </div>
             `;
-            productList.appendChild(productDiv);
-        }
+        productList.appendChild(productDiv);
+      }
     });
-/* --------------------------------------------------------------------------------- */
-}})
-/* ---------------------howmanyitems--------------------------- */
-
-/* ---------------------add to cart--------------------------- */
-// let cart = [];
-// let add = document.querySelectorAll(".add");
-// add.forEach((add, index) => {
-//     add.addEventListener("click", function() {
-//         let product = products[index];
-//         cart.push(product);
-//         localStorage.setItem("cart", JSON.stringify(cart));
-//     });
-// });
-/* --------------------------------مشروع اضافه و طرح المنتج--------------------------- */
-// window.plus=function plus(index){
-//     let countElement = document.getElementById(`count-${index}`);
-//     let count = parseInt(countElement.innerHTML) + 1;
-//     countElement.innerHTML = count;
-// }
-
-// window.minus=function minus(index){
-//     let countElement = document.getElementById(`count-${index}`);
-//     let count = parseInt(countElement.innerHTML);
-//     if(count > 0){
-//         count--;
-//         countElement.innerHTML = count;
-//     }
-// }
-// {/* <button class="plus" onclick="plus(${index})"><i class="fa fa-plus" aria-hidden="true"></i></button>
-// <span id="count-${index}">0</span>
-// <button class="minus" onclick="minus(${index})"><i class="fa fa-minus" aria-hidden="true"></i></button> */}
+  }
+});

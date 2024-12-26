@@ -110,7 +110,7 @@ div {
     gap: 20px; 
     height: 550px;
     justify-content: center;
-    padding: 20px;
+    padding: 80px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.0);
 }
@@ -272,6 +272,7 @@ footer a {
     color: white;
 }
 .contain{
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,10 +293,9 @@ footer a {
     text-align: center;
 }
 
-.checkout-button {
+.product-list .checkout-button {
     display: block;
-    position: relative;
-    padding: 10px 40px;
+    padding: 10px 70px;
     font-size: 1.2em;
     color: white;
     background-color: #28a745;
@@ -303,14 +303,14 @@ footer a {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 80px auto;
+    margin: 20px auto;
 }
 .checkout-div{
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 10px;
+    bottom: 4.7rem;
     margin-bottom: 20px;
 }
 
@@ -318,18 +318,19 @@ footer a {
     background-color: #218838;
 }
 #howmanyitems {
-    background-color: #f9f9f9;
-    color: black;
+    width: 15px;
+    height: 15px;
+    background-color: #ff0000;
+    color: rgb(255, 255, 255);
     border: none;
-    padding: 1px 1px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 11px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 43rem;
+    margin-left: 44.2rem;
     margin-bottom: 2rem;
     z-index: 1000;
     border-radius: 100%;
